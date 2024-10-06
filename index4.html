@@ -1,110 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <!-- Title of the page -->
   <title>Traffic Light Game</title>
   <style>
+    /* Set the background to black and style the text */
     body {
-      background-color: #000; /* Black background for better contrast */
-      text-align: center; /* Center content horizontally */
+      background-color: #000; /* Set black background for the entire page */
+      text-align: center;
       font-family: "Comic Sans MS", cursive, sans-serif;
-      color: #fff; /* White text color for better readability */
+      color: #fff;
     }
 
+    /* Center the container and align items vertically */
     #container {
-      margin: 100px auto; /* Vertically center the container */
+      margin: 100px auto;
       display: flex;
       flex-direction: column;
-      align-items: center; /* Center content inside the container */
+      align-items: center;
     }
 
+    /* Style the main heading with shadow and color */
     h1 {
       font-size: 36px;
-      color: #ff5733; /* Orange color for the title */
-      text-shadow: 2px 2px 2px #ff5733; /* Add a subtle shadow to the title */
-      margin-bottom: 20px; /* Space between title and traffic lights */
+      color: #ff5733;
+      text-shadow: 2px 2px 2px #ff5733;
+      margin-bottom: 20px;
     }
 
+    /* Style the traffic light container */
     .traffic-lights {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-      background-color: #333; /* Dark background for traffic lights box */
+      background-color: #333; /* Black background for the traffic light */
       padding: 40px;
-      border-radius: 20px; /* Rounded corners */
-      width: 120px; /* Set width for the traffic lights container */
-      height: 360px; /* Set height for the traffic lights container */
+      border-radius: 20px;
+      width: 120px;
+      height: 360px;
     }
 
+    /* General styling for all traffic light buttons */
     .traffic-light-button {
-      border: none; /* Remove border from buttons */
-      padding: 40px; /* Set button size */
-      cursor: pointer; /* Pointer cursor to indicate button */
-      border-radius: 50%; /* Circular buttons to resemble traffic lights */
-      margin-bottom: 15px; /* Space between the buttons */
+      border: none;
+      padding: 40px;
+      text-align: center;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 50%; /* Make buttons circular */
+      margin-bottom: 15px;
       width: 80px;
       height: 80px;
-      transition: transform 0.3s ease; /* Smooth scaling effect on hover */
+      transition: transform 0.3s ease; /* Smooth scaling on hover */
     }
 
+    /* Style for the red button */
     .button-red {
-      background-color: #ff5733; /* Red color for the first light */
+      background-color: #ff5733;
     }
 
+    /* Style for the yellow button */
     .button-yellow {
-      background-color: #f1c40f; /* Yellow color for the second light */
+      background-color: #f1c40f;
     }
 
+    /* Style for the green button */
     .button-green {
-      background-color: #2ecc71; /* Green color for the third light */
+      background-color: #2ecc71;
     }
 
+    /* Increase button size slightly on hover */
     .traffic-light-button:hover {
-      transform: scale(1.1); /* Slight zoom effect on hover */
+      transform: scale(1.1);
     }
   </style>
 </head>
 
 <body>
+  <!-- Main container for the traffic light game -->
   <div id="container">
+    <!-- Title of the game -->
     <h1>Traffic Lights</h1>
-    <!-- Traffic light button container -->
+    <!-- Traffic light buttons -->
     <div class="traffic-lights">
-      <!-- Red light button -->
+      <!-- Red button triggers RED light in Firebase -->
       <button class="traffic-light-button button-red" onclick="setTrafficLightStatus('RED')"></button>
-      <!-- Yellow light button -->
+      <!-- Yellow button triggers YELLOW light in Firebase -->
       <button class="traffic-light-button button-yellow" onclick="setTrafficLightStatus('YELLOW')"></button>
-      <!-- Green light button -->
+      <!-- Green button triggers GREEN light in Firebase -->
       <button class="traffic-light-button button-green" onclick="setTrafficLightStatus('GREEN')"></button>
     </div>
   </div>
 
-  <!-- Firebase SDKs for app, auth, and database -->
+  <!-- Firebase SDK scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
 
   <script>
-    // Firebase configuration settings
+    // Firebase project configuration object
     const firebaseConfig = {
-      apiKey: "your-api-key",
-      authDomain: "your-auth-domain",
-      databaseURL: "your-database-url",
-      projectId: "your-project-id",
-      storageBucket: "your-storage-bucket",
-      messagingSenderId: "your-messaging-sender-id",
-      appId: "your-app-id",
-      measurementId: "your-measurement-id"
+      apiKey: "AIzaSyDiMmMjRve1-yJAhsRmOjW3fDsp0MNFg2o",
+      authDomain: "manav-8eb13.firebaseapp.com",
+      databaseURL: "https://manav-8eb13-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "manav-8eb13",
+      storageBucket: "manav-8eb13.appspot.com",
+      messagingSenderId: "331260708467",
+      appId: "1:331260708467:web:d6fd40e7eec9685fb2cc06",
+      measurementId: "G-F7P0T3MEMZ"
     };
 
-    // Initialize Firebase app with the provided config
+    // Initialize Firebase app with the given configuration
     firebase.initializeApp(firebaseConfig);
 
-    // Function to update the traffic light status in Firebase database
+    // Function to set the traffic light status in the Firebase database
     function setTrafficLightStatus(led) {
       firebase.database().ref("light").set({
-        led: led // Set the selected light color (red, yellow, or green) in database
+        led: led // Update the 'led' field in Firebase with the selected color (RED, YELLOW, or GREEN)
       });
     }
   </script>
